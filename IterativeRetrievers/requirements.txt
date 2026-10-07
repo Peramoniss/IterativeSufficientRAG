@@ -1,0 +1,9 @@
+numpy
+transformers
+numpy
+faiss-gpu
+tqdm
+torch
+pydantic
+fastapi
+uvicorn

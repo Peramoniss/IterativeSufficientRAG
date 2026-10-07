@@ -1,0 +1,3 @@
+- Estudar processo de submissão
+- Validar se modelo com GAT melhora a generalização pelo menos
+- Computar os resultados
