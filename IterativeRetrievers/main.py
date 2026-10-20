@@ -117,15 +117,19 @@ print("TESTANDO O IRCoT")
 MODEL = "qwen3.5:4b" #qwen3.5:4b #"gpt-oss:20b-128k" #gpt-4o #llama3.1:8b #deepseek-r1:8b #gemma4:12b olmo-3:7b-instruct
 # JUDGE_MODEL = "mistral-7b-instruct" #qwen3.5:4b llama3.1:8b #olmo-3:7b-instruct
 JUDGE_MODEL = "mistral:7b-instruct" #qwen3.5:4b llama3.1:8b #olmo-3:7b-instruct
-# API_URL = "https://renewed-lucid-jiffy.ngrok-free.dev"
-# API_URL = "https://vbulletin-leo-potatoes-filling.trycloudflare.com"
 LOAD = True
 # LOAD = False
 
+import configparser
+
+config = configparser.ConfigParser()
+config.read("config.ini")
+# API_URL = config["remote_url"]
+
 print("Configurando modelos...")
-http_client = httpx.Client(verify='petrobras-ca-root.pem')
+http_client = httpx.Client(verify=config["pem"])
 # request_manager = ExternalRequestManager(url="https://apit.petrobras.com.br/ia/texto/v1/litellm/litellm/", api_key="d37099ddd8094dfc8fe5c2ebf220532d", http_client=http_client)
-request_manager = OllamaRequestManager(api_key="sk-c1d67e5489424c3a8373dd96e9377407", timeout=120) #https://ollama.k8s.inf.ufrgs.br/ollama
+request_manager = OllamaRequestManager(api_key=config["api_key"], timeout=120) #https://ollama.k8s.inf.ufrgs.br/ollama
 # request_manager.start_ollama()
 # request_manager = FlanT5RequestManager()
 print("Configurando retriever...")
@@ -147,8 +151,6 @@ metrics_list = [metrics.LanguageExactMatch(), metrics.LanguageF1(tokenizer), met
 HEAD = 500
 THRESH = None #0.8
 RETRIEVER_TRAINMENT = "BERT" # Graph
-# for model in ["qwen3.5:9b"]:
-# for model in ["llama3.1:8b"]:
 for model in ["qwen3.5:4b"]:
     try:
         common_ircot_manager = IRCoT(retriever=retriever, inference_manager=request_manager, model=model, reranker=reranker, load_if_exist=LOAD) 

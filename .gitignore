@@ -17,3 +17,4 @@ ClusterDownloads/
 FlashRAG/
 .vscode/
 __pycache__/
+*.ini

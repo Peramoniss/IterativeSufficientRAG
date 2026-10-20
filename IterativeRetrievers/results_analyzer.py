@@ -31,9 +31,9 @@ def cost(model_name: str, instances: int, tokens: dict):
     return results
 
 CLASSIFIER = "BERT"
-DATASET = "2Wiki"
+# DATASET = "2Wiki"
 # DATASET = "Hotpot"
-# DATASET = "Musique"
+DATASET = "Musique"
 # MODEL = "deepseek-v4-flash" # deepseek-v4-flash claude-sonnet-5 deepseek-v4-flash qwen3.8-27b gpt-5.4
 MODEL = "qwen3.5" # deepseek-v4-flash claude-sonnet-5 deepseek-v4-flash qwen3.8-27b gpt-5.4
 reranker = False
